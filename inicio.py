@@ -3,7 +3,11 @@ import pandas as pd
 
 
 df = pd.read_csv("pib.csv")
-df.head(10)
+df.info()
+
+nulos = df.isnull().sum().sort_values(ascending=False)
+nulos[nulos > 0]
+
 
 st.sidebar.header("Filtros de Búsqueda")
 
