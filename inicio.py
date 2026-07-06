@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
-
+df = pd.read_csv("pib.csv")
 
 st.sidebar.header("Filtros de Búsqueda")
 with st.sidebar:
