@@ -3,6 +3,7 @@ import pandas as pd
 
 
 df = pd.read_csv("pib.csv")
+df.head(10)
 
 st.sidebar.header("Filtros de Búsqueda")
 
