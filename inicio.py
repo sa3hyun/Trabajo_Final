@@ -13,4 +13,4 @@ st.sidebar.header("Filtros de Búsqueda")
 with st.sidebar:
     st.markdown("### Dashboard Interactivo: Crecimiento del PIB (% anual)")
 
-st.subheader("made by sa3hyun", text_alignment="center")
+st.link_button("Made by @Sa3hyun", "https://github.com/sa3hyun")
