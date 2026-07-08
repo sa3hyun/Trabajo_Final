@@ -4,7 +4,7 @@ import pandas as pd
 
 df = pd.read_csv("nuevo_pib.csv")
 
-st.image(https://www.biobiochile.cl/assets/logos-notas-patrocinadas/6302219_logo_img_patrocinada.png)
+st.image("https://www.biobiochile.cl/assets/logos-notas-patrocinadas/6302219_logo_img_patrocinada.png")
 
 
 st.sidebar.header("Filtros de Búsqueda")
