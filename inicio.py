@@ -2,11 +2,7 @@ import streamlit as st
 import pandas as pd
 
 
-df = pd.read_csv("pib.csv")
-df.info()
-
-nulos = df.isnull().sum().sort_values(ascending=False)
-nulos[nulos > 0]
+df = pd.read_csv("nuevo_pib.csv")
 
 
 st.sidebar.header("Filtros de Búsqueda")
