@@ -36,7 +36,7 @@ paises = df['Country Name']
 #Y escribo mi nombre WOW
 with st.sidebar:
     st.markdown("Dashboard Interactivo: Crecimiento del PIB (% anual)")
-    pais = st.selectbox('escoger pais', paises)
+    pais = st.selectbox('Escoger pais', paises)
     st.markdown("---")
     st.write("- Génesis Trincado")
 
@@ -90,6 +90,8 @@ prom_anual = datos_america[anios_txt].mean(axis=0)
 ax.plot(anios_int, prom_anual.values,
         label='Promedio América')
 
+ax.legend(loc='upper left', frameon=True)
+
 ax.set_title(f'Crecimiento del PIB (% anual)')
 ax.set_ylabel("%")
 
@@ -97,6 +99,10 @@ ax.set_ylabel("%")
 #"2000.0" y eso no me gustaba, asi que lo arregle con el siguiente codigo que encontre 
 #en la pagina de streamlit
 ax.set_xticks(anios_int[::5]) 
+
+#Y muestro el gráfico en Streamlit
+
+st.pyplot(fig)
 
 #Hago las KPIs
 col1, col2, col3 = st.columns(3)
@@ -110,9 +116,7 @@ with col3:
      with st.container(border=True):
          st.metric("Diferencia", f"{diferencia:.2f}%")
 
-#Y muestro el gráfico en Streamlit
 
-st.pyplot(fig)
 
 #Y fin :)
 
