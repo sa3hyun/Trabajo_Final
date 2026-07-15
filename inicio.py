@@ -41,10 +41,6 @@ with st.sidebar:
     st.write("- Génesis Trincado")
 
 
-
-
-#Hago que se muestre el pais anteriormente seleccionado (Texto)
-#st.write (pais)
 #Coloco un slider para elegir de que año hasta que año quieren visualizar los datos mostrados
 #Dentro del grafico que se muestra más abajo
 anios = st.slider('Elige Año', 1961, 2025, value=(1961, 2025)) 
@@ -53,34 +49,75 @@ anios = st.slider('Elige Año', 1961, 2025, value=(1961, 2025))
 #Primero creo df_pais para poder seleccionar con mas facilidad el pais que se selecciono en la selectbox
 df_pais = df[df['Country Name'] == pais]
 df_pais.drop(columns=['Unnamed: 0','Country Code'], inplace=True)
-st.write (df_pais)
+
 #Hago lo mismo pero con los años seleccionados
-#anios_selec = [for a in range anios in df.columns]
 
-anios_txt = [str(a) for a in range(anios[0], anios[1])]
-#st.write(anios_txt)
+#(El codigo de aca abajo estaba mal, lo arregle y lo deje comentado para que vean como estaba antes :p)
+#anios_selec = [for a in range anios in df.columns] }
 
-anios_int = [int(a) for a in range(anios[0], anios[1])]
-#st.write(anios_int) 
+## 1. Creamos las listas de años correctamente
+anios_txt = [str(a) for a in range(anios[0], anios[1] + 1)]
+anios_int = [int(a) for a in range(anios[0], anios[1] + 1)]
 
-df_pais[]
+# Filtro los datos correctamente usando df_pais
+# Extraigo la serie de datos del país para los años seleccionados
+s_pais = df_pais[anios_txt].iloc[0]
 
-#Muesto el grafico tomando en cuenta el pais seleccionado y los años desde hasta.
+# Saco la media del PIB del país seleccionado
+p_pais = s_pais.mean()
 
-x = anios_int
-y = df_pais
-plt.plot(x, y, color='blue', linestyle='dashed', linewidth=2.5, marked='o')
-plt.title("Metricas Anuales")
-plt.xlabel(Años)
-plt.ylabel(PIB)
+#df_pais[]
+
+#Ahora saco el promedio de america
+datos_america = df[df['Country Name'].isin(paises)]
+
+promedio_america = (datos_america[anios_txt].mean(axis=1).mean())
+
+#Ahora hago la diferencia
+diferencia = p_pais - promedio_america
+
+#Hago que se muestre el pais anteriormente seleccionado (Texto)
+st.write (pais)
+
+#Hago el grafico del crecimiento del PIB 
+fig, ax = plt.subplots(figsize=(10, 5))
+
+ax.plot(anios_int, s_pais.values,
+        label=pais)
+
+prom_anual = datos_america[anios_txt].mean(axis=0)
+
+ax.plot(anios_int, prom_anual.values,
+        label='Promedio América')
+
+ax.set_title(f'Crecimiento del PIB (% anual)')
+ax.set_ylabel("%")
+
+#Cuando hice el grafico note que algunos años los mostraba como "1999.0" y otros como
+#"2000.0" y eso no me gustaba, asi que lo arregle con el siguiente codigo que encontre 
+#en la pagina de streamlit
+ax.set_xticks(anios_int[::5]) 
+
+#Hago las KPIs
+col1, col2, col3 = st.columns(3)
+with col1:
+     with st.container(border=True):
+         st.metric("Promedio PIB país", f"{p_pais:.2f}%")
+with col2:
+     with st.container(border=True):
+         st.metric("Promedio PIB (América)", f"{promedio_america:.2f}%")
+with col3:
+     with st.container(border=True):
+         st.metric("Diferencia", f"{diferencia:.2f}%")
+
+#Y muestro el gráfico en Streamlit
+
 st.pyplot(fig)
 
-#Agrego cajas de información como el "Promedio PIB (pais)", "Promedio PIB" y "Diferencia"
-#Con sus respectivos datos 
-
-st.metric 
-
 #Y fin :)
+
+
+
 
 
 st.link_button("Made by @Sa3hyun", "https://github.com/sa3hyun")
